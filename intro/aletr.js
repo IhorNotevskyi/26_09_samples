@@ -1,1 +1,1 @@
-alert('From JS file');
+alert('From JS file')
