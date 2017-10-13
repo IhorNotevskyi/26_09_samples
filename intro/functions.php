@@ -140,3 +140,11 @@ echo '<br>';
 list($first, $second, $third) = toArray(4, 6, 'test');
 var_dump($first, $second, $third);
 echo '<br>';
+
+
+$ru_string = 'тест 2';
+$us_string = 'test 2';
+
+echo '<pre>';
+var_dump(mb_strlen($ru_string), mb_strlen($us_string));
+echo '</pre>';
