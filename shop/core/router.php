@@ -3,6 +3,10 @@
 function run()
 {
     $url = trim(urldecode($_SERVER['REQUEST_URI']), " \t\n\r\0\x0B/");
+    $getParamsStart = strpos($url, '?');
+    if (false !== $getParamsStart) {
+        $url = substr($url, 0, $getParamsStart);
+    }
     $urlParts = array_filter(explode('/', $url));
 
     $controller = prepareControllerFileName(getArrayValue($urlParts, 0, 'index'));
