@@ -22,6 +22,12 @@ $sandwich->setBread($bread);
 $sandwich->setButter($butter);
 $sandwich->setCheese($cheese);
 
-$result = $sandwich->create();
+$cheese2 = new GollandianCheese();
+$sandwich2 = clone $sandwich;
+$sandwich2->setCheese($cheese2);
 
-var_dump($result);
+
+$result = $sandwich->create();
+$result2 = $sandwich2->create();
+
+var_dump($sandwich->create(), $sandwich2->create());
