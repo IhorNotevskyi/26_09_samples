@@ -10,4 +10,9 @@ abstract class Computer
     {
         return 'Pressed some button';
     }
+
+    final public function calculate($a, $b)
+    {
+        return $a + $b;
+    }
 }

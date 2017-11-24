@@ -1,6 +1,6 @@
 <?php
 
-class Notebook extends Computer
+final class Notebook extends Computer
 {
     public function turnOn()
     {

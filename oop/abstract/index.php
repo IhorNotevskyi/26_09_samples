@@ -36,3 +36,5 @@ var_dump(
     PortableInterface::MAX_WEIGHT,
     Computer::VOLUME
 );
+
+var_dump($notebook->calculate(3, 3));
