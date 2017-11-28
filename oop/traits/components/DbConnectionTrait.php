@@ -1,5 +1,7 @@
 <?php
 
+namespace components;
+
 trait DbConnectionTrait
 {
     private $dbConnection = null;
@@ -7,7 +9,7 @@ trait DbConnectionTrait
     /**
      * @return DB
      */
-    private function getDbConnection()
+    private function getConnection()
     {
         if (null === $this->dbConnection) {
             $this->dbConnection = new DB();
