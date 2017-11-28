@@ -1,6 +1,8 @@
 <?php
 
-class r_qwe_Test
+namespace qwerty;
+
+class Test
 {
     public function __construct()
     {

@@ -1,6 +1,8 @@
 <?php
 
-class r_Test
+namespace r;
+
+class Test
 {
     public function __construct()
     {

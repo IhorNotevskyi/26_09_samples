@@ -1,5 +1,9 @@
 <?php
 
-require_once __DIR__ . '/old_autoloader.php';
+require_once __DIR__ . '/namespaces_autoloader.php';
 
-new r_qwe_Test();
+use qwerty\Test;
+
+new Test();
+new modules\admin\Test();
+

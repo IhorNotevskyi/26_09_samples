@@ -1,6 +1,8 @@
 <?php
 
-class q_Test
+namespace modules\admin;
+
+class Test
 {
     public function __construct()
     {
