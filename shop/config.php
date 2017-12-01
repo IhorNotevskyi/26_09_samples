@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'controllers' => __DIR__ . '/controllers',
+    'controllersNamespace' => '\controllers',
     'templates' => __DIR__ . '/views',
     'db' => [
         'host' => 'localhost',

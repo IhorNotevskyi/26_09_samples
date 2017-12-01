@@ -1,14 +1,25 @@
 <?php
 
-function actionIndex()
-{
-    return renderTemplate('index/index', [
-        'qwerty' => 'Some text there',
-        'name' => 'Dmytro Kotenko'
-    ]);
-}
+namespace controllers;
 
-function actionList()
+use components\Controller;
+
+/**
+ * Class IndexController
+ * @package controllers
+ */
+class IndexController extends Controller
 {
-    return renderTemplate('index/list');
+    function actionIndex()
+    {
+        return $this->render('index/index', [
+            'qwerty' => 'Some text there',
+            'name' => 'Dmytro Kotenko'
+        ]);
+    }
+
+    function actionList()
+    {
+        return renderTemplate('index/list');
+    }
 }
