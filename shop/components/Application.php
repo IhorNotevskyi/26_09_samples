@@ -2,8 +2,6 @@
 
 namespace components;
 
-use helpers\Config;
-
 /**
  * Class Application
  * @package components
@@ -17,9 +15,8 @@ class Application
     public function __construct(array $config)
     {
         Registry::set('config', Config::getInstance()->addAttributes($config));
-
-        $template = new Template(Registry::get('config')->getAttribute('templates'));
-        Registry::set('template', $template);
+        Registry::set('db', $this->prepareDbConnection());
+        Registry::set('template', $this->prepareTemplate());
     }
 
     public function run()
@@ -27,4 +24,29 @@ class Application
         $router = new Router($_SERVER['REQUEST_URI']);
         return $router->dispatch();
     }
+
+    /**
+     * @return Template
+     */
+    private function prepareTemplate()
+    {
+        return new Template(Registry::get('config')->get('templates'));
+    }
+
+    /**
+     * @return Database|null
+     */
+    private function prepareDbConnection()
+    {
+        $db = Database::getInstance();
+        $db->setConnection(
+            Config::getInstance()->get('db.host'),
+            Config::getInstance()->get('db.user'),
+            Config::getInstance()->get('db.password'),
+            Config::getInstance()->get('db.database')
+        );
+
+        return $db;
+    }
+
 }

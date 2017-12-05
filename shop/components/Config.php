@@ -1,10 +1,12 @@
 <?php
 
-namespace helpers;
+namespace components;
+
+use helpers\Arrays;
 
 /**
  * Class Config
- * @package helpers
+ * @package components
  */
 class Config
 {
@@ -50,7 +52,7 @@ class Config
      * @param null|mixed $default
      * @return mixed|null
      */
-    public function getAttribute($key, $default = null)
+    public function get($key, $default = null)
     {
         return Arrays::getValue($key, $this->attributes, $default);
     }

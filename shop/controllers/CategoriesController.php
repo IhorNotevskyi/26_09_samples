@@ -1,33 +1,35 @@
 <?php
 
-function actionList()
+namespace controllers;
+
+use models\Category;
+
+/**
+ * Class CategoriesController
+ * @package controllers
+ */
+class CategoriesController extends \components\Controller
 {
-    $pageSize = 2;
-
-    $sql = "SELECT * FROM categories LIMIT {$pageSize}";
-
-    $page = getArrayValue($_GET, 'page');
-    if ($page) {
-        $offset = max($page - 1, 0) * $pageSize;
-        $sql .= " OFFSET {$offset}";
+    public function actionList()
+    {
+        $model = new Category();
+        return $this->render('categories/list', [
+            'categories' => $model->getCategories()
+        ]);
     }
 
-    return renderTemplate('categories/list', [
-        'categories' => selectRows($sql)
-    ]);
-}
-
-function actionCreate()
-{
-    if (getIsPostRequest()) {
-        $title = getArrayValue($_POST, 'title');
-        $sql = <<<SQL
+    public function actionCreate()
+    {
+        if (getIsPostRequest()) {
+            $title = getArrayValue($_POST, 'title');
+            $sql = <<<SQL
 INSERT INTO categories (title) VALUES ('{$title}')
 SQL;
 
-        executeSQLString($sql);
-        redirect('/categories/list');
-    }
+            executeSQLString($sql);
+            redirect('/categories/list');
+        }
 
-    return renderTemplate('categories/create');
+        return renderTemplate('categories/create');
+    }
 }

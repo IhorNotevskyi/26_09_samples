@@ -11,6 +11,7 @@ abstract class Controller
     /**
      * @param string $view
      * @param array $variables
+     * @return string
      */
     public function render($view, $variables = [])
     {
@@ -23,5 +24,13 @@ abstract class Controller
     protected function getView()
     {
         return Registry::get('template');
+    }
+
+    /**
+     * @return Config
+     */
+    protected function getConfig()
+    {
+        return Registry::get('config');
     }
 }

@@ -8,5 +8,8 @@ return [
         'user' => 'root',
         'password' => '',
         'database' => '2609_shop_db'
+    ],
+    'pagination' => [
+        'defaultPageSize' => 2
     ]
 ];

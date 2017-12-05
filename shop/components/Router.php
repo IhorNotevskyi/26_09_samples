@@ -45,7 +45,7 @@ class Router
      */
     private function prepareController($urlPart)
     {
-        $controllersNamespace = Registry::get('config')->getAttribute('controllersNamespace');
+        $controllersNamespace = Registry::get('config')->get('controllersNamespace');
         $controllerClass = "{$controllersNamespace}\\" . Strings::camelize($urlPart) . 'Controller';
         if (!class_exists($controllerClass)) {
             throw new \Exception('Requested class is not exists');

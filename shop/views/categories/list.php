@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @var array $categories
+ * @var \models\Category[] $categories
  */
 
 ?>
@@ -21,9 +21,9 @@
 
     <?php foreach ($categories as $category) : ?>
         <tr>
-            <th><?= getArrayValue($category, 'id') ?></th>
-            <th><?= getArrayValue($category, 'title') ?></th>
-            <th><?= getArrayValue($category, 'created_at') ?></th>
+            <th><?= $category->id ?></th>
+            <th><?= $category->title ?></th>
+            <th><?= $category->getPreparedDate() ?></th>
         </tr>
     <?php endforeach; ?>
 
