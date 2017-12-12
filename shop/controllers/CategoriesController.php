@@ -2,13 +2,16 @@
 
 namespace controllers;
 
+use helpers\Request;
+use InvalidArgumentException;
 use models\Category;
+use components\Controller;
 
 /**
  * Class CategoriesController
  * @package controllers
  */
-class CategoriesController extends \components\Controller
+class CategoriesController extends Controller
 {
     public function actionList()
     {
@@ -18,18 +21,46 @@ class CategoriesController extends \components\Controller
         ]);
     }
 
+    /**
+     * @return string
+     */
     public function actionCreate()
     {
-        if (getIsPostRequest()) {
-            $title = getArrayValue($_POST, 'title');
-            $sql = <<<SQL
-INSERT INTO categories (title) VALUES ('{$title}')
-SQL;
+        if (Request::getIsPostRequest()) {
+            $model = new Category();
+            $model->load(Request::post());
+            $model->save();
 
-            executeSQLString($sql);
-            redirect('/categories/list');
+            $this->redirect('/categories/list');
         }
 
-        return renderTemplate('categories/create');
+        return $this->render('categories/create');
+    }
+
+    public function actionUpdate()
+    {
+        $id = Request::get('id');
+        if (empty($id)) {
+            throw new InvalidArgumentException("Required argument is not defined");
+        }
+
+        $model = new Category();
+        $model->findOne($id);
+
+        if (Request::getIsPostRequest()) {
+            $model->load(Request::post());
+            $model->save();
+
+            $this->redirect('/categories/list');
+        }
+
+        return $this->render('categories/update', ['category' => $model]);
+    }
+
+    public function actionDelete()
+    {
+//        $model = new Category();
+//        $model->findOne($id);
+//        $model->delete();
     }
 }

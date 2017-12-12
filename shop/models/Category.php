@@ -2,7 +2,7 @@
 
 namespace models;
 
-use components\Model;
+use components\ActiveRecord;
 
 /**
  * Class Category
@@ -12,7 +12,7 @@ use components\Model;
  * @property string $title
  * @property string $created_at
  */
-class Category extends Model
+class Category extends ActiveRecord
 {
     /**
      * @return string

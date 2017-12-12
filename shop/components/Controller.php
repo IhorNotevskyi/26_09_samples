@@ -1,6 +1,7 @@
 <?php
 
 namespace components;
+use helpers\Request;
 
 /**
  * Class Controller
@@ -32,5 +33,15 @@ abstract class Controller
     protected function getConfig()
     {
         return Registry::get('config');
+    }
+
+    /**
+     * @param string $url
+     * @param int $status
+     * @param bool $terminate
+     */
+    protected function redirect($url, $status = 301, $terminate = true)
+    {
+        Request::redirect($url, $status, $terminate);
     }
 }

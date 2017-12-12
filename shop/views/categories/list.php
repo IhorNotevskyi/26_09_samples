@@ -15,6 +15,7 @@
         <th scope="col">ID</th>
         <th scope="col">Category name</th>
         <th scope="col">Create date</th>
+        <th scope="col"></th>
     </tr>
     </thead>
     <tbody>
@@ -24,6 +25,7 @@
             <th><?= $category->id ?></th>
             <th><?= $category->title ?></th>
             <th><?= $category->getPreparedDate() ?></th>
+            <td><a href="/categories/update?id=<?= $category->id ?>" class="btn btn-xs btn-primary">Update</a> </td>
         </tr>
     <?php endforeach; ?>
 
