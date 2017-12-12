@@ -1,6 +1,7 @@
 <?php
 
 namespace components;
+
 use exceptions\DbException;
 use helpers\Arrays;
 use InvalidArgumentException;
