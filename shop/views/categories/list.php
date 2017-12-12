@@ -25,7 +25,10 @@
             <th><?= $category->id ?></th>
             <th><?= $category->title ?></th>
             <th><?= $category->getPreparedDate() ?></th>
-            <td><a href="/categories/update?id=<?= $category->id ?>" class="btn btn-xs btn-primary">Update</a> </td>
+            <td>
+                <a href="/categories/update?id=<?= $category->id ?>" class="btn btn-sm btn-primary">Update</a>
+                <a href="/categories/delete?id=<?= $category->id ?>" class="btn btn-sm btn-danger">Delete</a>
+            </td>
         </tr>
     <?php endforeach; ?>
 

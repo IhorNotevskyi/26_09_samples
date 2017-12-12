@@ -59,8 +59,15 @@ class CategoriesController extends Controller
 
     public function actionDelete()
     {
-//        $model = new Category();
-//        $model->findOne($id);
-//        $model->delete();
+        $id = Request::get('id');
+        if (empty($id)) {
+            throw new InvalidArgumentException("Required argument is not defined");
+        }
+
+        $model = new Category();
+        $model->findOne($id);
+        $model->delete();
+
+        $this->redirect('/categories/list');
     }
 }

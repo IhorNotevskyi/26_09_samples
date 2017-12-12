@@ -108,23 +108,41 @@ abstract class ActiveRecord extends Model
         $columns = [];
         $attributes = [];
         foreach ($this->attributes as $key => $value) {
+            $alias = ":{$key}";
+            $attributes[$alias] = $value;
+
             if ($key == $this->primaryKey) {
                 continue;
             }
 
-            $alias = ":{$key}";
-            $attributes[$alias] = $value;
             $columns[] = "{$key} = {$alias}";
         }
 
-        $columns = implode(',', $columns);
-        $sql = "UPDATE {$this->tableName()} SET {$columns} WHERE {$this->primaryKey} = 1";
+        $columns = implode(', ', $columns);
+        $sql = "UPDATE {$this->tableName()} SET {$columns} WHERE {$this->primaryKey} = :{$this->primaryKey}";
 
         $statement = $this->getDb()->prepare($sql);
 
         foreach ($attributes as $key => $value) {
-            $statement->bindParam($key, $value);
+            $statement->bindValue($key, $value);
         }
+
+        return $statement->execute();
+    }
+
+    /**
+     * @return bool
+     * @throws DbException
+     */
+    public function delete()
+    {
+        if ($this->getIsNewRecord()) {
+            throw new DbException("Record for delete is not found");
+        }
+
+        $sql = "DELETE FROM {$this->tableName()} WHERE {$this->primaryKey} = :{$this->primaryKey} LIMIT 1";
+        $statement = $this->getDb()->prepare($sql);
+        $statement->bindValue(":{$this->primaryKey}", $this->{$this->primaryKey});
 
         return $statement->execute();
     }
